@@ -20,8 +20,6 @@ class PAS_PCMException
 		$this.Message = $m
 
 		$this.ErroredOn = (Get-Date).ToString()
-
-		$global:LastPAS_PCMError = $this
 	}# PAS_PCMException([System.String]$m) 
 
 	addExceptionData([PSCustomObject]$e)
@@ -54,6 +52,7 @@ class PAS_PCMException
 		$e.AddAPIData($apicall, $payload, $response)
 		$e.AddExceptionData($_)
 		$e.AddData("variablename",$variable)
+		$global:LastPAS_PCMError = $e
 	}
 	#>
 }# class PAS_PCMException

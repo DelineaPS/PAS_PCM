@@ -5,6 +5,7 @@ class PASPrincipal
     [System.String]$Name
     [System.String]$ID
 
+	# primary constructor
     PASPrincipal($n,$i)
     {
         $this.Name = $n

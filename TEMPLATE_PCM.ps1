@@ -4,13 +4,12 @@
 
 # setting the user and repo to target
 $User = "dnlrv"
-$Repo = "TEMPLATE_PCM"
+$Repo = "PAS_PCM"
 
 # enter in any files you definitely want ignored
-$FilesToIgnore = "LICENSE","README.md","TEMPLATE_PCM_local.ps1"
+$FilesToIgnore = "LICENSE","README.md","PAS_PCM_local.ps1"
 
 # version check if desired
-<#
 if ($PSVersionTable.PSVersion.ToString() -lt 7.4)
 {
 	Write-Error "PowerShell version 7.4+ required."
@@ -32,7 +31,7 @@ $Files       = $MainTree.tree | Where-Object -Property type -eq blob | Select-Ob
 $FileUrlPaths = $Files | Where-Object {$FilesToIgnore -notcontains $_}
 
 # ArrayList to hold ScriptBlocks
-$TEMPLATE_PCMScriptBlocks = New-Object System.Collections.ArrayList
+$PAS_PCMScriptBlocks = New-Object System.Collections.ArrayList
 
 # for each directory in the repo
 foreach ($directory in $Directories)
@@ -59,7 +58,7 @@ foreach ($directory in $Directories)
 		$obj | Add-Member -MemberType NoteProperty -Name ScriptBlock -Value $scriptblock
 	
 		# adding our temp object to our ArrayList
-		$TEMPLATE_PCMScriptBlocks.Add($obj) | Out-Null
+		$PAS_PCMScriptBlocks.Add($obj) | Out-Null
 
 		# and dot source it
 		. $scriptblock
@@ -67,7 +66,7 @@ foreach ($directory in $Directories)
 }# foreach ($directory in $Directories)
 
 # setting our ScriptBlock ArrayList to global
-$global:TEMPLATE_PCMScriptBlocks = $TEMPLATE_PCMScriptBlocks
+$global:PAS_PCMScriptBlocks = $PAS_PCMScriptBlocks
 
 #######################################
 #endregion ############################

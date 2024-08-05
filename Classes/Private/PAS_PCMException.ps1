@@ -1,6 +1,6 @@
-# class to hold a custom TEMPLATE_PCMError
+# class to hold a custom PAS_PCMError
 [NoRunspaceAffinity()]
-class TEMPLATE_PCMException
+class PAS_PCMException
 {
 	[System.String]$Message
 	[System.String]$ErrorMessage
@@ -15,14 +15,14 @@ class TEMPLATE_PCMException
     [System.String]$Payload
     [PSCustomObject]$Response
 
-    TEMPLATE_PCMException([System.String]$m) 
+    PAS_PCMException([System.String]$m) 
 	{
 		$this.Message = $m
 
 		$this.ErroredOn = (Get-Date).ToString()
 
-		$global:LastTEMPLATE_PCMError = $this
-	}# TEMPLATE_PCMException([System.String]$m) 
+		$global:LastPAS_PCMError = $this
+	}# PAS_PCMException([System.String]$m) 
 
 	addExceptionData([PSCustomObject]$e)
 	{
@@ -50,10 +50,10 @@ class TEMPLATE_PCMException
 	# how to use
 	Catch
 	{
-		$e = New-Object TEMPLATE_PCMException -ArgumentList ("This errored here.")
+		$e = New-Object PAS_PCMException -ArgumentList ("This errored here.")
 		$e.AddAPIData($apicall, $payload, $response)
 		$e.AddExceptionData($_)
 		$e.AddData("variablename",$variable)
 	}
 	#>
-}# class TEMPLATE_PCMException
+}# class PAS_PCMException

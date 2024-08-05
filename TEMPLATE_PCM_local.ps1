@@ -3,7 +3,6 @@
 #######################################
 
 # version check if desired
-<#
 if ($PSVersionTable.PSVersion.ToString() -lt 7.4)
 {
 	Write-Error "PowerShell version 7.4+ required."
@@ -17,10 +16,10 @@ $Directories = Get-ChildItem -Recurse -Directory
 $CurrentDirectory = Get-Location | Select-Object -ExpandProperty Path
 
 # ArrayList to hold all our scripts
-$TEMPLATE_PCMScripts = New-Object System.Collections.ArrayList
+$PAS_PCMScripts = New-Object System.Collections.ArrayList
 
 # ArrayList to hold ScriptBlocks
-$TEMPLATE_PCMScriptBlocks = New-Object System.Collections.ArrayList
+$PAS_PCMScriptBlocks = New-Object System.Collections.ArrayList
 
 # for each directory we found
 foreach ($directory in $Directories)
@@ -35,11 +34,11 @@ foreach ($directory in $Directories)
 	$folderscripts | Add-Member -MemberType NoteProperty -Name ScriptType -Value ($directory.FullName -replace "^$([Regex]::Escape($CurrentDirectory))\\(.*)$",'$1')
 	
 	# add it to our script ArrayList
-	$TEMPLATE_PCMScripts.AddRange(@($folderscripts)) | Out-Null
+	$PAS_PCMScripts.AddRange(@($folderscripts)) | Out-Null
 }# foreach ($directory in $Directories)
 
 # for each script we found
-foreach ($script in $TEMPLATE_PCMScripts)
+foreach ($script in $PAS_PCMScripts)
 {
 	# get the contents of the script
     $scriptcontents = Get-Content $script.FullName -Raw
@@ -57,14 +56,14 @@ foreach ($script in $TEMPLATE_PCMScripts)
     $obj | Add-Member -MemberType NoteProperty -Name ScriptBlock -Value $scriptblock
 
     # adding our temp object to our ArrayList
-    $TEMPLATE_PCMScriptBlocks.Add($obj) | Out-Null
+    $PAS_PCMScriptBlocks.Add($obj) | Out-Null
 
     # and dot source it
     . $scriptblock
-}# foreach ($script in $TEMPLATE_PCMScripts)
+}# foreach ($script in $PAS_PCMScripts)
 
 # setting our ScriptBlock ArrayList to global
-$global:TEMPLATE_PCMScriptBlocks = $TEMPLATE_PCMScriptBlocks
+$global:PAS_PCMScriptBlocks = $PAS_PCMScriptBlocks
 
 #######################################
 #endregion ############################

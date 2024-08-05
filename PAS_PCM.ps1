@@ -68,6 +68,9 @@ foreach ($directory in $Directories)
 # setting our ScriptBlock ArrayList to global
 $global:PAS_PCMScriptBlocks = $PAS_PCMScriptBlocks
 
+# initializing a List[PASConnection] if it is empty or null
+$global:PASConnections = New-Object System.Collections.Generic.List[PASConnection]
+
 #######################################
 #endregion ############################
 #######################################

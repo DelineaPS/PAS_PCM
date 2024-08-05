@@ -8,7 +8,7 @@ class PASConnection
 
     PASConnection($po,$pc,$s)
     {
-        $this.PodFqdn                      = $po
+        $this.PodFqdn               = $po
         $this.PASConnection         = $pc
         $this.PASSessionInformation = $s
     }

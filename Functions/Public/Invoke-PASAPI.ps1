@@ -75,11 +75,11 @@ function global:Invoke-PASAPI
     }# Try
     Catch
     {
-        $e = New-Object PASException -ArgumentList ("A PAS error has occured. Check `$LastClousSuiteError for more information")
+        $e = New-Object PASPCMException -ArgumentList ("A PAS error has occured. Check `$LastPASPCMError for more information")
 		$e.AddAPIData($ApiCall, $Body, $response)
 		$e.AddExceptionData($_)
         Write-Error $_.Exception.Message
-		$global:LastPAS_PCMError = $e
+		$global:LastPASPCMError = $e
 		return $e
     }
 }# function global:Invoke-PASAPI 

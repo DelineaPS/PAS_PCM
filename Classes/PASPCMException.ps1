@@ -52,7 +52,7 @@ class PASPCMException
 		$e.AddAPIData($apicall, $payload, $response)
 		$e.AddExceptionData($_)
 		$e.AddData("variablename",$variable)
-		$global:LastPAS_PCMError = $e
+		$global:LastPASPCMError = $e
 	}
 	#>
 }# class PAS_PCMException

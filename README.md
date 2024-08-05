@@ -11,7 +11,7 @@ To get started, copy the snippet below and paste it directly into a PowerShell (
 One benefit of this method is when updates/fixes/enhancements are made to the repo, a new Cloud Grab will obtain those changes without needing to compile, deploy, and install a new PowerShell module. Effectively, this design makes this repo a "Cloud-based PowerShell Module".
 
 ```PowerShell
-$PAS_PCM = ([ScriptBlock]::Create(((Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/dnlrv/PAS_PCM/main/PAS_PCM.ps1').Content))); . $PAS_PCM
+$PAS_PCM = ([ScriptBlock]::Create(((Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/DelineaPS/PAS_PCM/main/PAS_PCM.ps1').Content))); . $PAS_PCM
 ```
 
 ## PAS_PCM (Local Grab)

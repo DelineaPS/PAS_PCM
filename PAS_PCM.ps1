@@ -3,7 +3,7 @@
 #######################################
 
 # setting the user and repo to target
-$User = "dnlrv"
+$User = "DelineaPS"
 $Repo = "PAS_PCM"
 
 # enter in any files you definitely want ignored

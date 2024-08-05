@@ -1,6 +1,6 @@
 # class to hold a custom PAS_PCMError
 [NoRunspaceAffinity()]
-class PAS_PCMException
+class PASPCMException
 {
 	[System.String]$Message
 	[System.String]$ErrorMessage
@@ -15,7 +15,7 @@ class PAS_PCMException
     [System.String]$Payload
     [PSCustomObject]$Response
 
-    PAS_PCMException([System.String]$m) 
+    PASPCMException([System.String]$m) 
 	{
 		$this.Message = $m
 
@@ -48,7 +48,7 @@ class PAS_PCMException
 	# how to use
 	Catch
 	{
-		$e = New-Object PAS_PCMException -ArgumentList ("This errored here.")
+		$e = New-Object PASPCMException -ArgumentList ("This errored here.")
 		$e.AddAPIData($apicall, $payload, $response)
 		$e.AddExceptionData($_)
 		$e.AddData("variablename",$variable)

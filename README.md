@@ -4,6 +4,8 @@ A variety of functions to make working with Delinea's Privileged Access Service 
 
 There are two ways of working with the PAS_PCM; the "Cloud Grab" method and a traditional download locally and run method.
 
+**This module requires PowerShell version 7.4+ or greater.**
+
 ## PAS_PCM (Cloud Grab)
 
 To get started, copy the snippet below and paste it directly into a PowerShell (Run-As Administrator not needed) window and run it. This effectively invokes every script from this GitHub repo directly as a web request and dot sources it into your current PowerShell session.

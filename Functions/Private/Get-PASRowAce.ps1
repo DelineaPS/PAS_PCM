@@ -92,7 +92,7 @@ function global:Get-PASRowAce
 			$e.AddExceptionData($_)
 			$e.AddData("RowAce",$rowace)
 			$e.AddData("PASPermission",$PASpermission)
-			$global:LastPAS_PCMError = $e
+			$global:LastPASPCMError = $e
         }# Catch
 
         # adding the PASRowAce object to our ArrayList

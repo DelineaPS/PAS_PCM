@@ -244,7 +244,6 @@ function global:Get-PASAccount
 		return $false
 	}
 
-	
 	if ($AllData.Exceptions.Count -gt 0)
 	{
 		$global:PASErrorStack = $AllData.Exceptions

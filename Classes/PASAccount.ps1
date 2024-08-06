@@ -123,7 +123,6 @@ class PASAccount
         $this.Healthy = $account.Healthy
         $this.Description = $account.Description
         $this.SSName = ("{0}\{1}" -f $this.SourceName, $this.Username)
-		<#
 
         # Populate the Vault property if Account is imported from a Vault
         if ($account.VaultId -ne $null)

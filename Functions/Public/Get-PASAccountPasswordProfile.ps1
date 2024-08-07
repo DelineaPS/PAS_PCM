@@ -29,7 +29,7 @@ function global:Get-PASAccountPasswordProfile
     [CmdletBinding(DefaultParameterSetName="All")]
     param
     (
-		[Parameter(Mandatory = $true, Position = 0, HelpMessage = "The PAS Accounts to get recent activity", ParameterSetName = "Account")]
+		[Parameter(Mandatory = $true, Position = 0, HelpMessage = "The PAS Accounts to get Password Profile information", ParameterSetName = "Account")]
 		[PASAccount[]]$Accounts
     )
 

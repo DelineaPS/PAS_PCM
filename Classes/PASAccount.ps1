@@ -34,6 +34,7 @@ class PASAccount
 	[PSCustomObject]$PasswordProfile
 	[System.Collections.ArrayList]$AccountActivity = @{}
 	[System.Collections.ArrayList]$PolicyOptions = @{}
+	[System.Collections.ArrayList]$ReviewedPermissions = @{}
 
 	# Empty constructor
     PASAccount() {}
@@ -305,8 +306,9 @@ class PASAccount
 	{
 		if (($this.PasswordProfile | Measure-Object | Select-Object -ExpandProperty Count) -eq 0) { $this.getPasswordProfile() }
 		if (($this.PolicyOptions   | Measure-Object | Select-Object -ExpandProperty Count) -eq 0) { $this.getPolicyOptions()   }
+		if (($this.AccountActivity | Measure-Object | Select-Object -ExpandProperty Count) -eq 0) { $this.getAccountActivity() }
 
-		$ReviewedPermissions = New-Object System.Collections.ArrayList
+		$ReviewingPermissions = New-Object System.Collections.ArrayList
 
 		foreach ($rowace in $this.PermissionRowAces)
 		{
@@ -340,12 +342,15 @@ class PASAccount
 			$obj | Add-Member -MemberType NoteProperty -Name DefaultCheckoutTimeSourcePolicy -Value ($this.PolicyOptions | Where-Object -Property PolicyOption -eq "/PAS/VaultAccount/DefaultCheckoutTime" | Select-Object -ExpandProperty fromPolicy)
 			$obj | Add-Member -MemberType NoteProperty -Name PasswordRotationDuration -Value ($this.PolicyOptions | Where-Object -Property PolicyOption -eq "/PAS/ConfigurationSetting/VaultAccount/PasswordRotateDuration" | Select-Object -ExpandProperty PolicyValue)
 			$obj | Add-Member -MemberType NoteProperty -Name PasswordRotationDurationSourcePolicy -Value ($this.PolicyOptions | Where-Object -Property PolicyOption -eq "/PAS/ConfigurationSetting/VaultAccount/PasswordRotateDuration" | Select-Object -ExpandProperty fromPolicy)
+			$obj | Add-Member -MemberType NoteProperty -Name RecentAccountActivity -Value ($this.AccountActivity).Count
 			$obj | Add-Member -MemberType NoteProperty -Name ID -Value $this.ID
 			$obj | Add-Member -MemberType NoteProperty -Name CredentialId -Value $this.CredentialId
 			
-			$ReviewedPermissions.Add($obj) | Out-Null
+			$ReviewingPermissions.Add($obj) | Out-Null
 		}# foreach ($rowace in $this.PermissionRowAces)
-		return $ReviewedPermissions
+
+		$this.ReviewedPermissions = $ReviewingPermissions
+		return $ReviewingPermissions
 	}# [System.Collections.ArrayList] reviewPermissions()
 
 	[PSCustomObject]exportToSSCCSV()

@@ -113,17 +113,23 @@ class PASSet
     }# getMembers()
 
     # helps determine who might own this set
-    determineOwner()
+    [PSObject] determineOwner()
     {
         # get all RowAces where the PrincipalType is User and has all permissions on this Set object
         $owner = $this.PermissionRowAces | Where-Object {$_.PrincipalType -eq "User" -and ($_.PASPermission.GrantInt -eq 253 -or $_.PASPermission.GrantInt -eq 65789)}
 
+		$response = $null
+
         Switch ($owner.Count)
         {
-            1       { $this.PotentialOwner = $owner.PrincipalName ; break }
-            0       { $this.PotentialOwner = "No owners found"    ; break }
-            default { $this.PotentialOwner = "Multiple potential owners found" ; break }
+            1       { $response = $owner.PrincipalName ; break }
+            0       { $response = "No owners found"    ; break }
+            default { $response = "Multiple potential owners found" ; break }
         }# Switch ($owner.Count)
+
+		$this.PotentialOwner = $response
+		
+		return $response
     }# determineOwner()
 
     [PSCustomObject]getPASObjects()

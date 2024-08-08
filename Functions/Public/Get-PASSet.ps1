@@ -173,7 +173,7 @@ function global:Get-PASSet
 				}
 	
 				# determin the potential owner of the Set
-				$set.determineOwner()
+				$set.determineOwner() | Out-Null
 				
 				# add it to our temporary returner object
 				$obj | Add-Member -MemberType NoteProperty -Name Sets -Value $set
@@ -202,7 +202,7 @@ function global:Get-PASSet
 			# incrementing result count
 			$i++
 			# update progress bar
-			Write-Progress -Activity "Getting Sets" -Status ("{0} out of {1} Complete" -f $i,$basesqlquery.Count) -PercentComplete $Completed -CurrentOperation ("Current: [{0}]" -f $_.SSName)
+			Write-Progress -Activity "Getting Sets" -Status ("{0} out of {1} Complete" -f $i,$basesqlquery.Count) -PercentComplete $Completed
 			# returning the result
 			$_
 		} #>

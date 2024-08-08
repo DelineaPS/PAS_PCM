@@ -28,7 +28,7 @@ function global:Checkout-PASAccountPassword
     [CmdletBinding(DefaultParameterSetName="All")]
     param
     (
-		[Parameter(Mandatory = $true, Position = 0, HelpMessage = "The PAS Accounts to checkout", ParameterSetName = "Account")]
+		[Parameter(Mandatory = $true, Position = 0, HelpMessage = "The PAS Accounts to checkout.", ParameterSetName = "Account")]
 		[PASAccount[]]$Accounts
     )
 

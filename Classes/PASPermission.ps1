@@ -7,20 +7,26 @@ class PASPermission
     [System.Int64]$GrantInt     # the Int-based number for the permission mask
     [System.String]$GrantBinary # the binary string of the the permission mask
     [System.String]$GrantString # the human readable permission mask
+	hidden [System.String]$PASPCMObjectType
 
-	# constructor for reserialization
-    PASPermission ($pasobject)
-    {
-        # for each property passed in
+	# empty constructor
+	PASPermission () {}
+
+	# method for reserialization
+	resetObject ($pasobject)
+	{
+		# for each property passed in
 		foreach ($property in $pasobject.PSObject.Properties) 
         {
 			# loop into each property and readd it
             $this.("{0}" -f $property.Name) = $property.Value
         }
-	}# PASPermission ($pasobject) 
+	}# resetObject ($pasobject) #>
 
+	#primary constructor
     PASPermission ([System.String]$t, [System.Int64]$gi, [System.String]$gb)
     {
+		$this.PASPCMObjectType = "PASPermission"
         $this.Type        = $t
         $this.GrantInt    = $gi
         $this.GrantBinary = $gb

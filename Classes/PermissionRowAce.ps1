@@ -8,21 +8,27 @@ class PermissionRowAce
     [System.Boolean]$isInherited   # determines if this permission is inherited
 	[System.String]$InheritedFrom  # if inherited, displays where this permission is inheriting from
     [PSCustomObject]$PASPermission # the PASpermission object
+	hidden [System.String]$PASPCMObjectType
 	
-	# constructor for reserialization
-	PermissionRowAce ($pasobject)
-    {
-        # for each property passed in
+	# empty constructor
+	PermissionRowAce () {}
+
+	# method for reserialization
+	resetObject ($pasobject)
+	{
+		# for each property passed in
 		foreach ($property in $pasobject.PSObject.Properties) 
         {
 			# loop into each property and readd it
             $this.("{0}" -f $property.Name) = $property.Value
         }
-	}# PermissionRowAce ($pasobject) 
+	}# resetObject ($pasobject)
 
-   PermissionRowAce([System.String]$pt, [System.String]$puuid, [System.String]$pn, `
+	# primary constructor
+    PermissionRowAce([System.String]$pt, [System.String]$puuid, [System.String]$pn, `
                    [System.Boolean]$ii, [System.String]$if, [PSCustomObject]$pp)
     {
+		$this.PASPCMObjectType = "PermissionRowAce"
         $this.PrincipalType = $pt
         $this.PrincipalUuid = $puuid
         $this.PrincipalName = $pn

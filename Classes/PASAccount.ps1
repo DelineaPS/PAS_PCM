@@ -35,24 +35,26 @@ class PASAccount
 	[System.Collections.ArrayList]$AccountActivity = @{}
 	[System.Collections.ArrayList]$PolicyOptions = @{}
 	[System.Collections.ArrayList]$ReviewedPermissions = @{}
+	hidden [System.String]$PASPCMObjectType
 
 	# Empty constructor
     PASAccount() {}
-
-	# constructor for reserialization
-	PASAccount ($pasobject)
+	
+	# method for reserialization
+	resetObject ($pasobject)
 	{
 		# for each property passed in
 		foreach ($property in $pasobject.PSObject.Properties) 
         {
-			# loop into each property and readd it
-            $this.("{0}" -f $property.Name) = $property.Value
+				# loop into each property and readd it
+				$this.("{0}" -f $property.Name) = $property.Value
         }
-	}# PASAccount ($pasobject)
+	}# resetObject ($pasobject)
 
 	# primary constructor
     PASAccount($account, [System.String]$t)
     {
+		$this.PASPCMObjectType = "PASAccount"
         $this.AccountType    = $t
 		$this.CredentialType = $account.CredentialType
 		$this.CredentialId   = $account.CredentialId

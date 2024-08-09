@@ -16,12 +16,13 @@ class PASSet
     [System.Collections.ArrayList]$MembersUuid = @{} # the Uuids of the members
     [System.Collections.ArrayList]$SetMembers  = @{} # the members of this set
 	[System.Collections.ArrayList]$SetActivity = @{}
+	hidden [System.String]$PASPCMObjectType
 
+	# empty constructor
     PASSet() {}
 
-	<#
-	# constructor for reserialization
-	PASAccount ($pasobject)
+	# method for reserialization
+	resetObject ($pasobject)
 	{
 		# for each property passed in
 		foreach ($property in $pasobject.PSObject.Properties) 
@@ -29,11 +30,12 @@ class PASSet
 			# loop into each property and readd it
             $this.("{0}" -f $property.Name) = $property.Value
         }
-	}# PASAccount ($pasobject)
-	#>
+	}# resetObject ($pasobject)
 
+	# primary constructor
     PASSet($set)
     {
+		$this.PASPCMObjectType = "PASSet"
         $this.SetType = $set.CollectionType
         $this.ObjectType = $set.ObjectType
         $this.Name = $set.Name

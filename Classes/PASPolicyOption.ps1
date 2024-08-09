@@ -5,20 +5,23 @@ class PASPolicyOption
 	[System.String]$PolicyOption
 	[System.String]$fromPolicy
 	[PSObject]$PolicyValue
+	hidden [System.String]$PASPCMObjectType
 
-	# constructor for reserialization
-    PASPolicyOption ($pasobject)
-    {
-        # for each property passed in
+	# method for reserialization
+	resetObject ($pasobject)
+	{
+		# for each property passed in
 		foreach ($property in $pasobject.PSObject.Properties) 
         {
 			# loop into each property and readd it
             $this.("{0}" -f $property.Name) = $property.Value
         }
-	}# PASPolicyOption ($pasobject) 
+	}# resetObject ($pasobject)
 
+	# primary constructor
 	PASPolicyOption([System.String]$po, [System.String]$fp, [PSObject]$pv) 
 	{
+		$this.PASPCMObjectType = "PASPolicyOption"
 		$this.PolicyOption = $po
 		$this.fromPolicy   = $fp
 		$this.PolicyValue  = $pv

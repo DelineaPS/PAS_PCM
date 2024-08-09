@@ -19,11 +19,26 @@ class PASSecret
     [System.Boolean]$WorkflowEnabled     # is Workflow enabled
     [PSCustomObject[]]$WorkflowApprovers # the Workflow Approvers for this Secret
 	[System.Collections.ArrayList]$SecretActivity = @{} 
+	hidden [System.String]$PASPCMObjectType
 
+	# empty constructor
     PASSecret () {}
 
+	# method for reserialization
+	resetObject ($pasobject)
+	{
+		# for each property passed in
+		foreach ($property in $pasobject.PSObject.Properties) 
+        {
+			# loop into each property and readd it
+            $this.("{0}" -f $property.Name) = $property.Value
+        }
+	}# resetObject ($pasobject)
+
+	# primary constructor
     PASSecret ($secretinfo)
     {
+		$this.PASPCMObjectType = "PASSecret"
         $this.Name            = $secretinfo.SecretName
         $this.Type            = $secretinfo.Type
         $this.ParentPath      = $secretinfo.ParentPath

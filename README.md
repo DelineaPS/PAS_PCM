@@ -52,6 +52,8 @@ Any `.ps1` that starts with an underscore (_) will be ignored by the module proc
 
 If you get output from the `Connect-PASTenant` cmdlet, you're connected and will remain connected for however long your tenant allows you to stay connected. All further cmdlets using this module from this point forward will use your credentials as if you were logged into the GUI tenant.
 
+Use `Get-PASPCMCommands` to display all cmdlets related to this module.
+
 Some cmdlets have additional methods with the custom class objects they return. See the help file for each cmdlet for more details.
 
 ## How to update

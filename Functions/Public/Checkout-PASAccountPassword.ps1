@@ -1,5 +1,5 @@
 ###########
-#region ### global:Checkout-PASAccountPassword # Checks out passwords for PASAccount objects
+#region ### global:Checkout-PASAccountPassword # CMDLETDESCRIPTION : Checks out the password to a PASAccount object :
 ###########
 function global:Checkout-PASAccountPassword
 {

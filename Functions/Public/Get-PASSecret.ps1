@@ -1,5 +1,5 @@
 ###########
-#region ### global:Get-PASSecret # Gets a PASSecret object from the tenant
+#region ### global:Get-PASSecret # CMDLETDESCRIPTION : Gets Secrets from the PAS tenant :
 ###########
 function global:Get-PASSecret
 {

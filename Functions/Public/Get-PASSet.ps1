@@ -1,5 +1,5 @@
 ###########
-#region ### global:Get-PASSet # Gets a PAS Set object
+#region ### global:Get-PASSet # CMDLETDESCRIPTION : Gets Sets from the PAS tenant :
 ###########
 function global:Get-PASSet
 {

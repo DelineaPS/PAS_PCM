@@ -1,5 +1,5 @@
 ###########
-#region ### global:Get-PASBearerToken # Gets a PAS Bearer Token information.
+#region ### global:Get-PASBearerToken # CMDLETDESCRIPTION : Gets a PAS Bearer Token information. :
 ###########
 function global:Get-PASBearerToken
 {

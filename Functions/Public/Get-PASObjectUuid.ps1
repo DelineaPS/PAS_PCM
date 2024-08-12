@@ -1,5 +1,5 @@
 ###########
-#region ### global:Get-PASObjectUuid # Gets the PAS Uuid for the specified object
+#region ### global:Get-PASObjectUuid # CMDLETDESCRIPTION : Gets the PAS Uuid for the specified object :
 ###########
 function global:Get-PASObjectUuid
 {

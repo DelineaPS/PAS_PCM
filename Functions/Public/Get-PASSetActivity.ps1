@@ -1,5 +1,5 @@
 ###########
-#region ### global:Get-PASSetActivity # Gets the recent activity for a PAS Set.
+#region ### global:Get-PASSetActivity # CMDLETDESCRIPTION : Gets the recent activity for a PAS Set :
 ###########
 function global:Get-PASSetActivity
 {

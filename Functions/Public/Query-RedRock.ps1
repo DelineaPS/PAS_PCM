@@ -1,5 +1,5 @@
 ###########
-#region ### global:Query-RedRock # Make an SQL RedRock query to the tenant
+#region ### global:Query-RedRock # CMDLETDESCRIPTION : Make a SQL RedRock query to the tenant :
 ###########
 function global:Query-RedRock
 {

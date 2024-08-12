@@ -1,5 +1,5 @@
 ###########
-#region ### global:Review-PASSetPermissions # Reviews the permissions for PASSet objects
+#region ### global:Review-PASSetPermissions # CMDLETDESCRIPTION : Reviews the permissions for PASSet objects :
 ###########
 function global:Review-PASSetPermissions
 {

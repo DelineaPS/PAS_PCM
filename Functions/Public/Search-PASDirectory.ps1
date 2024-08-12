@@ -1,5 +1,5 @@
 ###########
-#region ### global:Search-PASDirectory # Searches existing directories for principals or roles and returns the Name and ID by like searches
+#region ### global:Search-PASDirectory # CMDLETDESCRIPTION : Searches existing directories for principals or roles and returns the Name and ID by like searches :
 ###########
 function global:Search-PASDirectory
 {

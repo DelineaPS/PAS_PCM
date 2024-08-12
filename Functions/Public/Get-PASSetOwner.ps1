@@ -1,5 +1,5 @@
 ###########
-#region ### global:Get-PASSetOwner # Gets likely owner of a PASSet object.
+#region ### global:Get-PASSetOwner # CMDLETDESCRIPTION : Gets likely owner of a PASSet object :
 ###########
 function global:Get-PASSetOwner
 {

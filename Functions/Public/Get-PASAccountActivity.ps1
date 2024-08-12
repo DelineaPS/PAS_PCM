@@ -1,5 +1,5 @@
 ###########
-#region ### global:Get-PASAccountActivity # Gets the recent account activity for PASAccount objects
+#region ### global:Get-PASAccountActivity # CMDLETDESCRIPTION : Gets the recent account activity for PASAccount objects :
 ###########
 function global:Get-PASAccountActivity
 {

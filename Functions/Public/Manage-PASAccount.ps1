@@ -1,5 +1,5 @@
 ###########
-#region ### global:Manage-PASAccount # Manages the provided accounts
+#region ### global:Manage-PASAccount # CMDLETDESCRIPTION : Manages the provided accounts :
 ###########
 function global:Manage-PASAccount
 {

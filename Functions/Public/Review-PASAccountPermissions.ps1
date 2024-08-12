@@ -1,5 +1,5 @@
 ###########
-#region ### global:Review-PASAccountPermissions # Reviews the permissions for PASAccount objects
+#region ### global:Review-PASAccountPermissions # CMDLETDESCRIPTION : Reviews the permissions for PASAccount objects :
 ###########
 function global:Review-PASAccountPermissions
 {

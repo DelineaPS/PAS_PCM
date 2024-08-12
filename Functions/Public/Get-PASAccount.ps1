@@ -1,5 +1,5 @@
 ###########
-#region ### global:Get-PASAccount # Gets a PAS Account object
+#region ### global:Get-PASAccount # CMDLETDESCRIPTION : Gets Accounts from the PAS tenant :
 ###########
 function global:Get-PASAccount
 {

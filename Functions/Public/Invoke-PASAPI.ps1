@@ -1,5 +1,5 @@
 ###########
-#region ### global:Invoke-PASAPI # Invokes RestAPI using either the interactive session or the bearer token
+#region ### global:Invoke-PASAPI # CMDLETDESCRIPTION : Invokes RestAPI using either the interactive session or the bearer token :
 ###########
 function global:Invoke-PASAPI
 {

@@ -1,6 +1,6 @@
 ###########
-#region ### global:Unmanage-PASAccount # Unmanages the provided accounts
-###########
+#region ### global:Unmanage-PASAccount # CMDLETDESCRIPTION : Unmanages the provided accounts :
+########### :
 function global:Unmanage-PASAccount
 {
     <#

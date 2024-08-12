@@ -1,5 +1,5 @@
 ###########
-#region ### global:Get-PASAccountPolicyOptions # Gets the global policies related to PASAccount objects
+#region ### global:Get-PASAccountPolicyOptions # CMDLETDESCRIPTION : Gets the global policies related to PASAccount objects :
 ###########
 function global:Get-PASAccountPolicyOptions
 {

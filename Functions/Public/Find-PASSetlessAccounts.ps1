@@ -1,5 +1,5 @@
 ###########
-#region ### global:Find-PASSetlessAccounts # Finds all VaultAccount objects in PAS that do not belong to any Set.
+#region ### global:Find-PASSetlessAccounts # CMDLETDESCRIPTION : Finds all VaultAccount objects in PAS that do not belong to any Set :
 ###########
 function global:Find-PASSetlessAccounts
 {

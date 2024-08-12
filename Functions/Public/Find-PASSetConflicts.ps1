@@ -1,5 +1,5 @@
 ###########
-#region ### global:Find-PASSetConflicts # Finds all Set conflicts in the PAS tenant
+#region ### global:Find-PASSetConflicts # CMDLETDESCRIPTION : Finds all Set conflicts in the PAS tenant :
 ###########
 function global:Find-PASSetConflicts
 {

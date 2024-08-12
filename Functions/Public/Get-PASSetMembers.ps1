@@ -1,5 +1,5 @@
 ###########
-#region ### global:Get-PASSetMembers # Gets the members of the PASSet.
+#region ### global:Get-PASSetMembers # CMDLETDESCRIPTION : Gets the members of the PASSet object :
 ###########
 function global:Get-PASSetMembers
 {

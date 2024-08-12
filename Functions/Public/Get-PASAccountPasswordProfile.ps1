@@ -1,5 +1,5 @@
 ###########
-#region ### global:Get-PASAccountPasswordProfile # Gets the Password Profile for PASAccount objects
+#region ### global:Get-PASAccountPasswordProfile # : CMDLETDESCRIPTION : Gets the Password Profile for PASAccount objects :
 ###########
 function global:Get-PASAccountPasswordProfile
 {

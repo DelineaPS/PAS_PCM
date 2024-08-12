@@ -1,5 +1,5 @@
 ###########
-#region ### global:Connect-PASTenant # Connects the user to a PAS tenant.
+#region ### global:Connect-PASTenant # CMDLETDESCRIPTION : Connects the user to a PAS tenant :
 ###########
 function global:Connect-PASTenant
 {

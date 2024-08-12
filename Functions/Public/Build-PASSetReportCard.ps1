@@ -1,5 +1,5 @@
 ###########
-#region ### global:Build-PASSetReportCard # Builds a Report Card with information about a PASSet object
+#region ### global:Build-PASSetReportCard # CMDLETDESCRIPTION : Builds a metric report card for a PAS Set :
 ###########
 function global:Build-PASSetReportCard
 {

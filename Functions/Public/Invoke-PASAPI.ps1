@@ -59,7 +59,7 @@ function global:Invoke-PASAPI
         Write-Debug ("Body=[{0}]" -f $Body)
 
         # making the call using our a Splat version of our connection
-        $Response = Invoke-RestMethod -Method Post -Uri $uri -Body $Body @global:PASSessionInformation
+        $Response = Invoke-RestMethod -Method Post -Uri $uri -Body $Body @global:PASSessionInformation -SkipHeaderValidation
 
         # if the response was successful
         if ($Response.Success)

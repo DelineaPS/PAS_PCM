@@ -170,9 +170,12 @@ function global:Consolidate-PASSets
 		# new temp object
 		$obj = New-Object PSObject
 
+		$AccountIDs = $AllSetReportCards.Members | Where-Object -Property SSName -in $these.Accounts | Select-Object SSName,ID -Unique
+
 		# adding in the same properties as before, but making sure they are unique by removing duplicate entries
 		$obj | Add-Member -MemberType NoteProperty -Name SubFolder -Value $subfolder
 		$obj | Add-Member -MemberType NoteProperty -Name Accounts -Value ($these.Accounts | Select-Object -Unique)
+		$obj | Add-Member -MemberType NoteProperty -Name AccountIDs -Value $AccountIDs
 		$obj | Add-member -MemberType NoteProperty -Name Principals -Value ($these.Principals | Sort-Object PrincipalName,PASPermissions | Get-Unique -AsString)
 		$obj | Add-Member -MemberType NoteProperty -Name fromConflicting -Value ($these.fromConflicting | Select-Object -Unique)
 

@@ -57,14 +57,16 @@ function global:Export-PASConsolidatedSets
 		foreach ($row in $rows)
 		{
 			# for each account in that row
-			foreach ($account in $row.Accounts)
+			foreach ($account in $row.AccountIDs)
 			{
+				
 				# new temp object
 				$obj = New-Object PSObject
 
 				# adding in the rest of the fields
 				$obj | Add-member -MemberType NoteProperty -Name FromSet -Value $setfolder
-				$obj | Add-Member -MemberType NoteProperty -Name Account -Value $account
+				$obj | Add-Member -MemberType NoteProperty -Name Account -Value $account.SSName
+				$obj | Add-Member -MemberType NoteProperty -Name AccountID -Value $account.ID
 				$obj | Add-Member -MemberType NoteProperty -Name ToFolder -Value $row.SubFolder
 
 				# if this entry isn't in the returning ArrayList, add it

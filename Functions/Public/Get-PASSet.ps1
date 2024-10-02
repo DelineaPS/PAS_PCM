@@ -67,7 +67,7 @@ function global:Get-PASSet
     param
     (
         [Parameter(Mandatory = $true, HelpMessage = "The type of Set to search.", ParameterSetName = "Type")]
-        [ValidateSet("System","Database","Account","Secret")]
+        [ValidateSet("System","Database","Account","Secret","SecretFolder")]
         [System.String]$Type,
 
         [Parameter(Mandatory = $true, HelpMessage = "The name of the Set to search.", ParameterSetName = "Name")]
@@ -103,10 +103,11 @@ function global:Get-PASSet
         # switch to translate backend naming convention
         Switch ($Type)
         {
-            "System"   { $newtype = "Server" ; break }
-            "Database" { $newtype = "VaultDatabase" ; break }
-            "Account"  { $newtype = "VaultAccount" ; break }
-            "Secret"   { $newtype = "DataVault" ; break }
+            "System"       { $newtype = "Server" ; break }
+            "Database"     { $newtype = "VaultDatabase" ; break }
+            "Account"      { $newtype = "VaultAccount" ; break }
+            "Secret"       { $newtype = "DataVault" ; break }
+            "SecretFolder" { $newtype = "DataVault" ; break }
             default    { }
         }# Switch ($Type)
 
@@ -117,6 +118,9 @@ function global:Get-PASSet
         if ($PSBoundParameters.ContainsKey("Type")) { $extras.Add(("ObjectType = '{0}'" -f $newtype)) | Out-Null }
         if ($PSBoundParameters.ContainsKey("Name")) { $extras.Add(("Name = '{0}'"       -f $Name))    | Out-Null }
         if ($PSBoundParameters.ContainsKey("Uuid")) { $extras.Add(("ID = '{0}'"         -f $Uuid))    | Out-Null }
+
+        # targeting Secret Folders only
+        if ($Type -eq "SecretFolder") { $extras.Add(("CollectionType = 'Phantom'")) | Out-Null }
 
         # join them together with " AND " and append it to the query
         $query += ($extras -join " AND ")

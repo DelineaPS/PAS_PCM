@@ -82,7 +82,7 @@ function global:Get-PASSecret
         [System.String]$Name,
 
         [Parameter(Mandatory = $true, HelpMessage = "The Uuid of the secret to search.",ParameterSetName = "Uuid")]
-        [System.String]$Uuid,
+        [System.String[]]$Uuid,
 
         [Parameter(Mandatory = $true, HelpMessage = "The type of the secret to search.",ParameterSetName = "Type")]
         [ValidateSet("Text","File")]
@@ -112,7 +112,7 @@ function global:Get-PASSecret
 
         # setting up the extra conditionals
         if ($PSBoundParameters.ContainsKey("Name")) { $extras.Add(("SecretName = '{0}'" -f $Name)) | Out-Null }
-        if ($PSBoundParameters.ContainsKey("Uuid")) { $extras.Add(("ID = '{0}'"         -f $Uuid)) | Out-Null }
+        if ($PSBoundParameters.ContainsKey("Uuid")) { $extras.Add("ID IN ({0})" -f (($Uuid -replace '^(.*)$',"'`$1'") -join ",")) | Out-Null }
         if ($PSBoundParameters.ContainsKey("Type")) { $extras.ADD(("Type = '{0}'"       -f $Type)) | Out-Null }
 
         # join them together with " AND " and append it to the query

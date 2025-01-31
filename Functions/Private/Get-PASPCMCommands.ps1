@@ -30,6 +30,9 @@ function global:Get-PASPCMCommands
 		# no param needed
     )
 
+	# arraylist for PASPCM command descriptions
+	$PASPCMcmddescriptions = New-Object System.Collections.ArrayList
+
 	# for each scriptblock we have in the Functions\Public folder
 	foreach ($scriptblock in ($PAS_PCMScriptBlocks | Where-Object -Property Type -eq "Functions\Public" | Sort-Object -Property Name))
 	{
@@ -42,11 +45,13 @@ function global:Get-PASPCMCommands
 		$obj = New-Object PSObject
 		$obj | Add-Member -MemberType NoteProperty -Name CmdletName -Value $cmdletname
 		$obj | Add-Member -MemberType NoteProperty -Name Description -Value $description
-		$obj
+
+		# adding it to our arraylist
+		$PASPCMcmddescriptions.Add($obj) | Out-Null
 	}# foreach ($scriptblock in ($PAS_PCMScriptBlocks | Where-Object -Property Type -eq "Functions\Public" | Sort-Object -Property Name))
 
-	# nulling out $obj
-	$obj = $null
+	# returning our array
+	return $PASPCMcmddescriptions
 }# function global:Get-PASPCMCommands
 #endregion
 ###########

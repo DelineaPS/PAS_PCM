@@ -76,7 +76,7 @@ class PASSet
                 # get the members and reformat the data a bit so it matches Collection/GetMembers
                 $m = Invoke-PASAPI -APICall ServerManage/GetSecretsAndFolders -Body (@{Parent=$this.ID} | ConvertTo-Json)
                 $m = $m.Results.Entities
-                $m | Add-Member -Type NoteProperty -Name Table -Value DataVault
+                $m | Add-Member -Type NoteProperty -Name Table -Value $m.Type
                 break
             }# "Phantom" # if this SetType is a Secret Folder
             "ManualBucket" # if this SetType is a Manual Set
@@ -97,9 +97,10 @@ class PASSet
                 # getting the object based on the Uuid
                 Switch ($i.Table)
                 {
-                    "DataVault"    {$obj = Query-RedRock -SQLQuery ("SELECT ID AS Uuid,SecretName AS Name FROM DataVault WHERE ID = '{0}'" -f $i.Key); break }
-                    "VaultAccount" {$obj = Query-RedRock -SQLQuery ("SELECT ID AS Uuid,(Name || '\' || User) AS Name FROM VaultAccount WHERE ID = '{0}'" -f $i.Key); break }
-                    "Server"       {$obj = Query-RedRock -SQLQuery ("SELECT ID AS Uuid,Name FROM Server WHERE ID = '{0}'" -f $i.Key); break }
+                    "DataVault"       {$obj = Query-RedRock -SQLQuery ("SELECT ID AS Uuid,SecretName AS Name FROM DataVault WHERE ID = '{0}'" -f $i.Key); break }
+                    "DataVaultFolder" {$obj = Query-RedRock -SQLQuery ("SELECT ID AS Uuid,Name FROM Sets WHERE = ID = '{0}'" -f $i.Key); break }
+                    "VaultAccount"    {$obj = Query-RedRock -SQLQuery ("SELECT ID AS Uuid,(Name || '\' || User) AS Name FROM VaultAccount WHERE ID = '{0}'" -f $i.Key); break }
+                    "Server"          {$obj = Query-RedRock -SQLQuery ("SELECT ID AS Uuid,Name FROM Server WHERE ID = '{0}'" -f $i.Key); break }
                 }
 
                 # new SetMember

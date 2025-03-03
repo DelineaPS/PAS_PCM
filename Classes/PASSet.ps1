@@ -98,7 +98,7 @@ class PASSet
                 Switch ($i.Table)
                 {
                     "DataVault"       {$obj = Query-RedRock -SQLQuery ("SELECT ID AS Uuid,SecretName AS Name FROM DataVault WHERE ID = '{0}'" -f $i.Key); break }
-                    "DataVaultFolder" {$obj = Query-RedRock -SQLQuery ("SELECT ID AS Uuid,Name FROM Sets WHERE = ID = '{0}'" -f $i.Key); break }
+                    "DataVaultFolder" {$obj = Query-RedRock -SQLQuery ("SELECT ID AS Uuid,Name FROM Sets WHERE ID = '{0}'" -f $i.Key); break }
                     "VaultAccount"    {$obj = Query-RedRock -SQLQuery ("SELECT ID AS Uuid,(Name || '\' || User) AS Name FROM VaultAccount WHERE ID = '{0}'" -f $i.Key); break }
                     "Server"          {$obj = Query-RedRock -SQLQuery ("SELECT ID AS Uuid,Name FROM Server WHERE ID = '{0}'" -f $i.Key); break }
                 }

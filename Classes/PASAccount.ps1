@@ -94,7 +94,7 @@ class PASAccount
         Switch ($this.AccountType)
         {
             "Database" { $this.SourceID = $account.DatabaseID; $this.SourceType = "DatabaseId"; $sourcetable = "VaultDatabase"; break }
-            "Domain"   { $this.SourceID = $account.DomainID; $this.SourceType = "DomainId"; $sourcetable = "VaultDomain"; break }
+            "Domain"   { $this.SourceID = $account.DomainID; $this.SourceType = "DomainID"; $sourcetable = "VaultDomain"; break }
             "Local"    { $this.SourceID = $account.Host; $this.SourceType = "Host"; $sourcetable = "Server"; break }
             "Cloud"    { $this.SourceID = $account.CloudProviderID; $this.SourceType = "CloudProviderId"; break }
         }

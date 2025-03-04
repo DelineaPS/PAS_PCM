@@ -12,6 +12,7 @@ class PASPasswordProfile
 	[System.Int32]$MinimumPasswordLength
 	[System.Int32]$MaximumPasswordLength
 	[System.String]$ProfileType
+	[System.String]$_STAMP
 
 	# empty constructor
 	PASPasswordProfile () {}

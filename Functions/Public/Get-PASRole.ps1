@@ -138,7 +138,7 @@ function global:Get-PASRole
 
             Try # to create a new PASRole object
             {   
-                $role = New-Object PASRole -ArgumentList ($query.Name, $query.ID, $query.Decription, $query.DirectoryServiceUuid)
+                $role = New-Object PASRole -ArgumentList ($query.Name, $query.ID, $query.Description, $query.DirectoryServiceUuid)
             }
             Catch
             {

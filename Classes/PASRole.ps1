@@ -7,6 +7,7 @@ class PASRole
     [System.String]$Description
     [System.String]$DirectoryServiceUuid
     [System.Collections.ArrayList]$RoleMembers = @{}
+    [System.Collections.ArrayList]$AdministrativeRights = @{}
 
     # empty constructor
     PASRole () {}
@@ -28,5 +29,15 @@ class PASRole
     [void] removeMember($rolemember)
     {
         $this.RoleMembers.Remove($rolemember) | Out-Null
+    }
+
+    [void] addAdministrativeRight($right)
+    {
+        $this.AdministrativeRights.Add($right) | Out-Null
+    }
+
+    [void] removeAdministrativeRight($right)
+    {
+        $this.AdministrativeRights.Remove($right) | Out-Null
     }
 }# class PASRole

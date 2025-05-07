@@ -150,7 +150,6 @@ function global:Get-PASRole
 				$obj | Add-Member -MemberType NoteProperty -Name Exceptions -Value $e
             }# Catch
 
-            
             Try # to get the members of this role
             {
                 $members = Invoke-PASAPI -APICall SaasManage/GetRoleMembers -Body (@{name=$role.ID} | ConvertTo-Json)
@@ -162,8 +161,6 @@ function global:Get-PASRole
                     $role.addMember($mem) | Out-Null
                 }
 
-                # add it to our temporary returner object
-				$obj | Add-Member -MemberType NoteProperty -Name Roles -Value $role
             }# Try # to get the members of this role
             Catch
             {
@@ -174,6 +171,32 @@ function global:Get-PASRole
                 $e.AddData("member",$member)
 				$e.AddData("role",$role)
                 $e.AddData("mem",$mem)
+				$obj | Add-Member -MemberType NoteProperty -Name Exceptions -Value $e
+            }# Catch
+
+            Try # to get the administrative rights of this role
+            {
+                $rights = Invoke-PASAPI -APICall core/GetAssignedAdministrativeRights -Body (@{role=$role.ID} | ConvertTo-Json)
+
+                foreach ($right in $rights.Results.Row)
+                {
+                    $r = New-Object PASRoleAdministrativeRight -ArgumentList ($right.Description, $right.Path)
+
+                    $role.addAdministrativeRight($r) | Out-Null
+                }
+
+                # add it to our temporary returner object
+				$obj | Add-Member -MemberType NoteProperty -Name Roles -Value $role
+            }# Try # to get the administrative rights of this role
+            Catch
+            {
+                # if an error occurred during the rest call, create a new PASException and return that with the relevant data
+				$e = New-Object PASPCMException -ArgumentList ("Error during New PASAccount object.")
+				$e.AddExceptionData($_)
+				$e.AddData("rights",$rights)
+                $e.AddData("right",$right)
+				$e.AddData("r",$r)
+                $e.AddData("role",$role)
 				$obj | Add-Member -MemberType NoteProperty -Name Exceptions -Value $e
             }# Catch
 			Finally

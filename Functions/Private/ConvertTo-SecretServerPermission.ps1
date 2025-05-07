@@ -31,7 +31,7 @@ function global:ConvertTo-SecretServerPermission
     }
     else
     {
-        $perms = "List"
+        $perms = "None"
     }
 
     $permission = New-Object MigratedPermission -ArgumentList ($Type,$Name,$RowAce.PrincipalType,$RowAce.PrincipalName,$RowAce.isInherited,$perms,$RowAce.PASPermission.GrantString)

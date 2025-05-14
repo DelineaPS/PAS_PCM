@@ -46,7 +46,7 @@ function global:Convert-PermissionToString
         if (($PermissionInt -band $bit.Value) -ne 0)
         {
             # add the key to our return string
-            $ReturnValue += $bit.Key + "|"
+            $ReturnValue += $bit.Key + ","
         }
     }# foreach ($bit in ($AceHash.GetEnumerator() | Sort-Object))
 

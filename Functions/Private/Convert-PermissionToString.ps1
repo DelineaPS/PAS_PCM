@@ -51,7 +51,7 @@ function global:Convert-PermissionToString
     }# foreach ($bit in ($AceHash.GetEnumerator() | Sort-Object))
 
     # return the string, removing the trailing "|"
-    return ($ReturnValue.TrimEnd("|"))
+    return ($ReturnValue.TrimEnd(","))
 }# global:Convert-PermissionToString
 #endregion
 ###########

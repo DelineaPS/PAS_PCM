@@ -32,8 +32,8 @@ function global:New-PASImportPermission
     [CmdletBinding(DefaultParameterSetName="All")]
     param
     (
-        [Parameter(Mandatory = $true, HelpMessage = "The offline data to reserialize.")]
-		[PSObject]$PermissionRowAces
+        [Parameter(Mandatory = $true, HelpMessage = "The PermissionRowAces data to process.")]
+		[PSObject[]]$PermissionRowAces
     )
 
     # arraylist for the imports

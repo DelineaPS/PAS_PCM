@@ -24,7 +24,7 @@ class PASImportPermission
     {   
         $uuid = $null
         
-        Invoke-Expression -Command ('$uuid = Search-PASDirectory -{0} "{1}" | Select-Object -ExpandProperty ID' -f $this.PType, $this.Principal)
+        $uuid = Invoke-Expression -Command ('$uuid = Search-PASDirectory -{0} "{1}" | Select-Object -ExpandProperty ID' -f $this.PType, $this.Principal)
 
         $this.PrincipalId = $uuid
     }

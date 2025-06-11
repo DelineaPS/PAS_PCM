@@ -122,11 +122,19 @@ function global:Import-PASRole
                 Write-Host ("- querying missing user [{0}] from [{1}]" -f $user.Name, $user.DirectoryService)
 
                 # query the ID of the user from this directory service
-                #$userquery = Query-RedRock -SQLQuery ("SELECT ID FROM User WHERE Username = '{0}' AND SourceDsLocalized = '{1}'" -f $user.Name, $user.DirectoryService) | Select-Object -ExpandProperty ID
                 $userquery = Query-RedRock -SQLQuery ("SELECT InternalName FROM DsUsers WHERE SystemName = '{0}' AND ServiceInstanceLocalized = '{1}'" -f $user.Name, $user.DirectoryService) | Select-Object -ExpandProperty InternalName
 
-                # add the ID to our userbank
-                $userbank.Add($userquery) | Out-Null
+                # if the response is not null, add it to our userbank
+                if ($userquery -ne $null)
+                {
+                    # add the ID to our userbank
+                    $userbank.Add($userquery) | Out-Null
+                }
+                else
+                {
+                    # otherwise report that user couldn't be found
+                    Write-Warning (" User [{0}] from [{1}] not found in connected tenant." -f $user.Name, $user.DirectoryService)
+                }
             }# foreach ($user in $missingusers)
 
         }# Try # to find and prepare the missing user principals

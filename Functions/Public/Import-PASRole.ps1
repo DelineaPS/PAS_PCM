@@ -166,8 +166,17 @@ function global:Import-PASRole
                 # query the ID of the group from this directory service
                 $groupquery = Query-RedRock -SQLQuery ("SELECT InternalName FROM DsGroups WHERE SystemName LIKE '%{0}%' AND ServiceInstanceLocalized = '{1}'" -f $group.Name, $group.DirectoryService) | Select-Object -ExpandProperty InternalName
                 
-                # add the ID to our groupbank
-                $groupbank.Add($groupquery) | Out-Null
+                # if the response is not null, add it to our groupbank
+                if ($groupquery -ne $null)
+                {
+                    # add the ID to our groupbank
+                    $groupbank.Add($groupquery) | Out-Null
+                }
+                else
+                {
+                    # otherwise report that user couldn't be found
+                    Write-Warning (" Group [{0}] from [{1}] not found in connected tenant." -f $group.Name, $group.DirectoryService)
+                }
             }# foreach ($group in $missinggroups)
 
         }# Try # to find and prepare the missing group principals

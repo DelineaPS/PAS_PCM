@@ -270,12 +270,22 @@ function global:Import-PASRole
                 $rightbank.Add($obj) | Out-Null
             }#  foreach ($right in $missingrights)
 
+            # doing this if there is only one right to update, endpoint gets picky about it needing to be in array format
+            if (($missingrights | Measure-Object | Select-Object -ExpandProperty Count) -eq 1)
+            {
+                $rightbank = (($rightbank | ConvertTo-Json -Compress) -replace '{','[{') -replace '}','}]'
+            }
+            else
+            {
+                $rightbank = ($rightbank | ConvertTo-Json)
+            }
+
             # if an update flag was set
             if ($RoleNeedAdminRightUpdate)
             {
                 # attempt to update the role
                 Write-Host ("Updating Administrative Rights in Role [{0}] ... " -f $existingrole.Name) -NoNewline
-                $assignrights = Invoke-PASAPI -APICall SaasManage/AssignSuperRights -Body ($rightbank | ConvertTo-Json)
+                $assignrights = Invoke-PASAPI -APICall SaasManage/AssignSuperRights -Body ($rightbank)
                 Write-Host ("Done!") -ForegroundColor Green
             }
             else

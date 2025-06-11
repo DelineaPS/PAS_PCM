@@ -122,7 +122,8 @@ function global:Import-PASRole
                 Write-Host ("- querying missing user [{0}] from [{1}]" -f $user.Name, $user.DirectoryService)
 
                 # query the ID of the user from this directory service
-                $userquery = Query-RedRock -SQLQuery ("SELECT ID FROM User WHERE Username = '{0}' AND SourceDsLocalized = '{1}'" -f $user.Name, $user.DirectoryService) | Select-Object -ExpandProperty ID
+                #$userquery = Query-RedRock -SQLQuery ("SELECT ID FROM User WHERE Username = '{0}' AND SourceDsLocalized = '{1}'" -f $user.Name, $user.DirectoryService) | Select-Object -ExpandProperty ID
+                $userquery = Query-RedRock -SQLQuery ("SELECT InternalName FROM DsUsers WHERE SystemName = '{0}' AND ServiceInstanceLocalized = '{1}'" -f $user.Name, $user.DirectoryService) | Select-Object -ExpandProperty InternalName
 
                 # add the ID to our userbank
                 $userbank.Add($userquery) | Out-Null

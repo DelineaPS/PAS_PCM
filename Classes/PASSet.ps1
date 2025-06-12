@@ -16,6 +16,7 @@ class PASSet
     [System.Collections.ArrayList]$MembersUuid = @{} # the Uuids of the members
     [System.Collections.ArrayList]$SetMembers  = @{} # the members of this set
 	[System.Collections.ArrayList]$SetActivity = @{}
+    [System.String]$SqlDynamic # only applies to dynamic sets
 	hidden [System.String]$PASPCMObjectType
 
 	# empty constructor
@@ -55,7 +56,14 @@ class PASSet
         if ($this.SetType -ne "SqlDynamic")
         {
             # getting the RowAces for the member permissions
-        $this.MemberPermissionRowAces = Get-PASCollectionRowAce -Type $this.ObjectType -Uuid $this.ID
+            $this.MemberPermissionRowAces = Get-PASCollectionRowAce -Type $this.ObjectType -Uuid $this.ID
+        }
+        else
+        {
+            # only for Dynamic Sets, getting the original sql query
+            $sql = Invoke-PASAPI -APICall Collection/GetCollection -Body (@{ID=$this.ID} | ConvertTo-Json) | Select-Object -ExpandProperty sql
+
+            $this.SqlDynamic = $sql
         }
     }# PASSet($set)
 

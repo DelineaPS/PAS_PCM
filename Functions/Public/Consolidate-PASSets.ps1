@@ -36,7 +36,7 @@ function global:Consolidate-PASSets
     .PARAMETER RemoveThese
 	Removes the specified principals from the Principals column in the resulting object. This would be used
 	to remove principals that have global access and would appear on every account. This simply removes those
-	principals from being listed in the Princials property.
+        principals from being listed in the Principals property.
 
     .INPUTS
     None. You can't redirect or pipe input to this function.

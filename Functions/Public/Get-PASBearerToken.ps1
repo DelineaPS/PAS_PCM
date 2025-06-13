@@ -72,7 +72,7 @@ function global:Get-PASBearerToken
 	}
 	Catch
 	{
-		$e = New-Object PAS_PCMException -ArgumentList ("Error during Get-PASBearerToken.")
+        $e = New-Object PASPCMException -ArgumentList ("Error during Get-PASBearerToken.")
 		$e.AddExceptionData($_)
 		$e.AddData("WebResponse",$WebResponse)
 		$e.AddData("Uri",$Uri)

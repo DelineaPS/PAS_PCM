@@ -161,13 +161,13 @@ class PASSet
 		
 		if ($this.ObjectType -eq "VaultAccount")
 		{
-			Invoke-Expression -Command ('[void]$PASObjects.AddRange(@(Get-PASAccount -Uuid {0}))' -f (($this.MembersUuid -replace '^(.*)$',"'`$1'") -join ","))
+			Invoke-Expression -Command ('[void]$thesePASObjects.AddRange(@(Get-PASAccount -Uuid {0}))' -f (($this.MembersUuid -replace '^(.*)$',"'`$1'") -join ","))
 		}
 		else
 		{
 			foreach ($id in $this.MembersUuid)
 			{
-			    Invoke-Expression -Command ('[void]$PASObjects.Add(({0} -Uuid {1}))' -f $command, $id)
+			    Invoke-Expression -Command ('[void]$thesePASObjects.Add(({0} -Uuid {1}))' -f $command, $id)
 			}
 		}
 

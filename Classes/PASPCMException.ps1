@@ -20,7 +20,7 @@ class PASPCMException
 		$this.Message = $m
 
 		$this.ErroredOn = (Get-Date).ToString()
-	}# PAS_PCMException([System.String]$m) 
+        }# PASPCMException([System.String]$m)
 
 	addExceptionData([PSCustomObject]$e)
 	{
@@ -55,4 +55,4 @@ class PASPCMException
 		$global:LastPASPCMError = $e
 	}
 	#>
-}# class PAS_PCMException
+}# class PASPCMException

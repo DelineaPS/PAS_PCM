@@ -82,7 +82,7 @@ function global:Connect-PASTenant
 		}
 		Catch
 		{
-			$e = New-Object PAS_PCMException -ArgumentList ("Error during Connect-PASTenant -EncodeSecret.")
+                        $e = New-Object PASPCMException -ArgumentList ("Error during Connect-PASTenant -EncodeSecret.")
 			$e.AddExceptionData($_)
 		}
 	}# if ($EncodeSecret.IsPresent)
@@ -123,7 +123,7 @@ function global:Connect-PASTenant
 		}
 		Catch
 		{
-			$e = New-Object PAS_PCMException -ArgumentList ("Error during Connect-PASTenant via bearer token.")
+                        $e = New-Object PASPCMException -ArgumentList ("Error during Connect-PASTenant via bearer token.")
 			$e.AddExceptionData($_)
 			$e.AddData("WebResponse",$WebResponse)
 			$e.AddData("Uri",$Uri)
@@ -196,7 +196,7 @@ function global:Connect-PASTenant
 		}
 		Catch
 		{
-			$e = New-Object PAS_PCMException -ArgumentList ("Error during StartAuthentication on Interactive Connect-PASTenant.")
+                        $e = New-Object PASPCMException -ArgumentList ("Error during StartAuthentication on Interactive Connect-PASTenant.")
 			$e.AddExceptionData($_)
 			$e.AddData("InitialResponse",$InitialResponse)
 			$e.AddData("Uri",$Uri)
@@ -358,7 +358,7 @@ function global:Connect-PASTenant
 				}
 				Catch
 				{
-					$e = New-Object PAS_PCMException -ArgumentList ("Error during 1st AdvanceAuthentication on Interactive Connect-PASTenant.")
+                                    $e = New-Object PASPCMException -ArgumentList ("Error during 1st AdvanceAuthentication on Interactive Connect-PASTenant.")
 					$e.AddExceptionData($_)
 					$e.AddData("WebResponse",$WebResponse)
 					$e.AddData("Uri",$Uri)
@@ -408,7 +408,7 @@ function global:Connect-PASTenant
 						}
 						Catch
 						{
-							$e = New-Object PAS_PCMException -ArgumentList ("Error during 2nd AdvanceAuthentication on Interactive Connect-PASTenant.")
+                                        $e = New-Object PASPCMException -ArgumentList ("Error during 2nd AdvanceAuthentication on Interactive Connect-PASTenant.")
 							$e.AddExceptionData($_)
 							$e.AddData("WebResponse",$WebResponse)
 							$e.AddData("Uri",$Uri)

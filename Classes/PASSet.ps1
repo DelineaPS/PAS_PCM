@@ -17,6 +17,7 @@ class PASSet
     [System.Collections.ArrayList]$SetMembers  = @{} # the members of this set
 	[System.Collections.ArrayList]$SetActivity = @{}
     [System.String]$SqlDynamic # only applies to dynamic sets
+    [System.Collections.ArrayList]$PASObjects = @{}
 	hidden [System.String]$PASPCMObjectType
 
 	# empty constructor
@@ -143,9 +144,9 @@ class PASSet
 		return $response
     }# determineOwner()
 
-    [PSCustomObject]getPASObjects()
+    getPASObjects()
     {
-        $PASObjects = New-Object System.Collections.ArrayList
+        $thesePASObjects = New-Object System.Collections.ArrayList
 
         [System.String]$command = $null
 
@@ -154,7 +155,7 @@ class PASSet
             "DataVault"    { $command = 'Get-PASSecret'; break }
             "Server"       { $command = 'Get-PASSystem'; break }
             "VaultAccount" { $command = 'Get-PASAccount'; break }
-            default        { Write-Host "This set type not supported yet."; return $false ; break }
+            default        { Write-Host "This set type not supported yet." ; break }
         }# Switch ($this.ObjectType)
 
 		
@@ -170,7 +171,7 @@ class PASSet
 			}
 		}
 
-        return $PASObjects
+        $this.PASObjects.AddRange(@($thesePASObjects)) | Out-Null
     }# [PSCustomObject]getPASObjects()
 
 	getSetActivity()

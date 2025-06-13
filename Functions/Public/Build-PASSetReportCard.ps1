@@ -216,7 +216,7 @@ function global:Build-PASSetReportCard
 		if ($SetConflicts.IsPresent)
 		{
 			# add text
-			$AnalysisOutput.Add((" >>> Set Concflicts <<<")) | Out-Null
+                        $AnalysisOutput.Add((" >>> Set Conflicts <<<")) | Out-Null
 
 			$AnalysisOutput.Add((("Number of Accounts in Set: [{0}]" -f $set.MembersUuid.Count))) | Out-Null
 

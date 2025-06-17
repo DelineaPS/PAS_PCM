@@ -49,6 +49,10 @@ function global:Get-PASAccount
     .PARAMETER Uuid
     Gets only Accounts with this UUID.
 
+    .PARAMETER SSName
+    The "Secret Server" name equivalent of this account, which is a concatenation of the source name and username.
+    For example, if the sourcename is LINUXSERVER01 and the username is root, then the SSName is LINUXSERVER01\root.
+
     .PARAMETER Limit
     Limits the number of potential Account objects returned.
 	
@@ -107,6 +111,9 @@ function global:Get-PASAccount
         [Parameter(Mandatory = $false, HelpMessage = "The name of the Account to search.", ParameterSetName = "Search")]
         [System.String]$UserName,
 
+        [Parameter(Mandatory = $false, HelpMessage = "The Secret Server Name of the Account to search.",ParameterSetName = "Ssname")]
+        [System.String[]]$SSName,
+
         [Parameter(Mandatory = $false, HelpMessage = "The Uuid of the Account to search.",ParameterSetName = "Uuid")]
         [System.String[]]$Uuid,
 
@@ -149,6 +156,7 @@ function global:Get-PASAccount
         if ($PSBoundParameters.ContainsKey("SourceName")) { $extras.Add(("Name = '{0}'" -f $SourceName)) | Out-Null }
         if ($PSBoundParameters.ContainsKey("UserName"))   { $extras.Add(("User = '{0}'" -f $UserName))   | Out-Null }
 		if ($PSBoundParameters.ContainsKey("Uuid")) { $extras.Add("ID IN ({0})" -f (($Uuid -replace '^(.*)$',"'`$1'") -join ",")) | Out-Null }
+        if ($PSBoundParameters.ContainsKey("Ssname")) { $extras.Add("Name || '\' || User IN ({0})" -f (($SSName -replace '^(.*)$',"'`$1'") -join ",")) | Out-Null }
 
 		# join them together with " AND " and append it to the query
 		$query += ($extras -join " AND ")

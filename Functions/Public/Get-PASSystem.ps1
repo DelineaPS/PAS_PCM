@@ -77,7 +77,7 @@ function global:Get-PASSystem
     param
     (
         [Parameter(Mandatory = $false, HelpMessage = "The name of the System to search.", ParameterSetName = "Search")]
-        [System.String]$Name,
+        [System.String[]]$Name,
 
         [Parameter(Mandatory = $false, HelpMessage = "The FQDN of the System to search.", ParameterSetName = "Search")]
         [System.String]$DNSName,
@@ -118,7 +118,7 @@ function global:Get-PASSystem
         $query += " WHERE "
 
         # setting up the extra conditionals
-        if ($PSBoundParameters.ContainsKey("Name"))        { $extras.Add(("Name = '{0}'" -f $Name)) | Out-Null }
+        if ($PSBoundParameters.ContainsKey("Name"))        { $extras.Add("Name IN ({0})" -f (($Name -replace '^(.*)$',"'`$1'") -join ",")) | Out-Null }
         if ($PSBoundParameters.ContainsKey("DNSName"))     { $extras.Add(("FQDN = '{0}'" -f $DNSName))   | Out-Null }
         if ($PSBoundParameters.ContainsKey("SessionType")) { $extras.Add(("SessionType = '{0}'" -f $SessionType)) | Out-Null}
         if ($PSBoundParameters.ContainsKey("Type"))        { $extras.Add(("ComputerClass = '{0}'" -f $Type)) | Out-Null}

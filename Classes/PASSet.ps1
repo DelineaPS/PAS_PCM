@@ -146,32 +146,27 @@ class PASSet
 
     getPASObjects()
     {
-        $thesePASObjects = New-Object System.Collections.ArrayList
-
-        [System.String]$command = $null
-
-        Switch ($this.ObjectType)
+        if ($this.SetType -ne "SqlDynamic")
         {
-            "DataVault"    { $command = 'Get-PASSecret'; break }
-            "Server"       { $command = 'Get-PASSystem'; break }
-            "VaultAccount" { $command = 'Get-PASAccount'; break }
-            default        { Write-Host "This set type not supported yet." ; break }
-        }# Switch ($this.ObjectType)
+            $thesePASObjects = New-Object System.Collections.ArrayList
 
-		
-		if ($this.ObjectType -eq "VaultAccount")
-		{
-			Invoke-Expression -Command ('[void]$thesePASObjects.AddRange(@(Get-PASAccount -Uuid {0}))' -f (($this.MembersUuid -replace '^(.*)$',"'`$1'") -join ","))
-		}
-		else
-		{
-			foreach ($id in $this.MembersUuid)
-			{
-			    Invoke-Expression -Command ('[void]$thesePASObjects.Add(({0} -Uuid {1}))' -f $command, $id)
-			}
-		}
+            [System.String]$command = $null
 
-        $this.PASObjects.AddRange(@($thesePASObjects)) | Out-Null
+            Switch ($this.ObjectType)
+            {
+                "DataVault"    { $command = 'Get-PASSecret'; break }
+                "Server"       { $command = 'Get-PASSystem'; break }
+                "VaultAccount" { $command = 'Get-PASAccount'; break }
+                default        { Write-Host "This set type not supported yet." ; break }
+            }# Switch ($this.ObjectType)
+
+            if ($command -ne $null -and (($this.MembersUuid | Measure-Object | Select-Object -ExpandProperty Count) -gt 0))
+            {
+                Invoke-Expression -Command ('[void]$thesePASObjects.Add(({0} -Uuid {1}))' -f $command, (($this.MembersUuid -replace '^(.*)$',"'`$1'") -join ","))
+         
+                $this.PASObjects.AddRange(@($thesePASObjects)) | Out-Null
+            }
+        }# if ($this.SetType -ne "SqlDynamic")
     }# [PSCustomObject]getPASObjects()
 
 	getSetActivity()

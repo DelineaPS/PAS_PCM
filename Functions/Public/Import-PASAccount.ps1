@@ -93,7 +93,7 @@ function global:Import-PASAccount
             Switch ($PASAccount.AccountType)
             {
                 "Local"  { $sourceobject = Query-RedRock -SQLQuery ("SELECT Name,ID From Server WHERE Name = '{0}'"  -f $PASAccount.SourceName)    ; $sourceobject | Add-Member -MemberType NoteProperty -Name "Tag" -Value "Host"     ; break }
-                "Domain" { $sourceobject = Query-RedRock -SQLQuery ("SELECT Name,ID From VaultDomain WHERE Name = '{0}'" -f $PASAccount.SouceName) ; $sourceobject | Add-Member -MemberType NoteProperty -Name "Tag" -Value "DomainID" ; break }
+                "Domain" { $sourceobject = Query-RedRock -SQLQuery ("SELECT Name,ID From VaultDomain WHERE Name = '{0}'" -f $PASAccount.SourceName) ; $sourceobject | Add-Member -MemberType NoteProperty -Name "Tag" -Value "DomainID" ; break }
                 default  { $sourceobject = $false; break }
             }
 

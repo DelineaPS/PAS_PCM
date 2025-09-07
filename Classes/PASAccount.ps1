@@ -240,6 +240,35 @@ class PASAccount
         }
     }# VerifyPassword()
 
+	[System.Boolean] VerifySource()
+	{
+		$result = $null
+		
+		switch ($this.SourceType) {
+			"Host" { 
+				$result = Invoke-PASAPI -APICall ServerManage/CheckTargetHealth -Body ( @{ID=$this.SourceId ; TargetType="Computer"} | ConvertTo-Json )	
+				break;
+			}
+			"Database" {
+				$result = Invoke-PASAPI -APICall ServerManage/CheckTargetHealth -Body ( @{ID=$this.SourceId ; TargetType="Database"} | ConvertTo-Json )
+				break;
+			}
+			
+		}# switch ($this.SourceType)
+
+		$this.Healthy = $result
+		
+		# if the VerifySource comes back okay, return true
+		if ($result -eq "OK")
+		{ 
+			return $true
+		} 
+		else 
+		{
+			return $false
+		}# if ($result -eq "OK")
+	}# VerifySource()
+
     [System.Boolean] UpdatePassword($password)
     {
         # if the account was successfully managed
